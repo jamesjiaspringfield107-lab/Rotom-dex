@@ -2,7 +2,7 @@ import { PokemonData } from "../types/pokemon";
 
 export const getPokepediaData = async (): Promise<PokemonData[]> => {
   try {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=386");
+    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
     const data = await response.json();
 
     const pokemonList = await Promise.all(
