@@ -182,6 +182,15 @@ export default function PokepediaScreen() {
           windowSize={5}
           refreshing={loading}
           onRefresh={loadData}
+          ListEmptyComponent={
+            !loading ? (
+              <View style={styles.emptyContainer}>
+                <Text style={styles.emptyText}>
+                  {`No Pokemon Found\nMatching "${searchQuery}"`}
+                </Text>
+              </View>
+            ) : null
+          }
         />
       )}
     </View>
@@ -223,6 +232,7 @@ const styles = StyleSheet.create({
   listContent: {
     paddingHorizontal: 16,
     paddingBottom: 20,
+    flexGrow: 1,
   },
   columnWrapper: {
     justifyContent: "space-between",
@@ -308,5 +318,17 @@ const styles = StyleSheet.create({
   ClearButton: {
     paddingRight: 10,
     justifyContent: "center",
+  },
+  emptyContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+  emptyText: {
+    color: "#8e8e93",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
