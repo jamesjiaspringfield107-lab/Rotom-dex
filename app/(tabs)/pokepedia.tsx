@@ -180,6 +180,8 @@ export default function PokepediaScreen() {
           initialNumToRender={10}
           maxToRenderPerBatch={10}
           windowSize={5}
+          refreshing={loading}
+          onRefresh={loadData}
         />
       )}
     </View>
