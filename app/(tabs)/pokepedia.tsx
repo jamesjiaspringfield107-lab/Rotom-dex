@@ -1,3 +1,4 @@
+import { FontAwesome6 } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -134,6 +135,18 @@ export default function PokepediaScreen() {
           onChangeText={setSearchQuery}
           style={styles.searchInput}
         />
+        {searchQuery.length > 0 && (
+          <TouchableOpacity
+            onPress={() => setSearchQuery("")}
+            style={styles.ClearButton}
+          >
+            <FontAwesome6
+              name="xmark-circle"
+              size={21}
+              color="#888888"
+            ></FontAwesome6>
+          </TouchableOpacity>
+        )}
       </View>
 
       {/* Main FlatList Lazy-Loaded Content */}
@@ -183,6 +196,8 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: "#ffffff",
     borderRadius: 16,
     marginHorizontal: 16,
@@ -196,6 +211,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   searchInput: {
+    flex: 1,
     paddingHorizontal: 16,
     paddingVertical: 12,
     fontSize: 16,
@@ -228,8 +244,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
   },
   cardImage: {
-    width: 96,
-    height: 96,
+    width: 94,
+    height: 94,
     marginVertical: 8,
   },
   cardName: {
@@ -286,5 +302,9 @@ const styles = StyleSheet.create({
     width: 220,
     height: 180,
     marginBottom: 12,
+  },
+  ClearButton: {
+    paddingRight: 10,
+    justifyContent: "center",
   },
 });
