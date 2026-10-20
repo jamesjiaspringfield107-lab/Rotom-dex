@@ -31,6 +31,19 @@ export default function RootLayout() {
           headerShadowVisible: false,
         }}
       />
+
+      {/* 4. Standalone Pokémon Detail Screen */}
+      <Stack.Screen
+        name="[id]"
+        options={{
+          title: "Pokémon Details",
+          headerBackTitle: "Back",
+          headerTintColor: "#000000",
+          headerStyle: { backgroundColor: "#ffffff" },
+          headerTitleStyle: { fontWeight: "bold" },
+          headerShadowVisible: false,
+        }}
+      />
     </Stack>
   );
 }
