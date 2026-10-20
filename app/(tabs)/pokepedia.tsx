@@ -1,4 +1,5 @@
 import { FontAwesome6 } from "@expo/vector-icons";
+import { Href, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -23,6 +24,7 @@ export default function PokepediaScreen() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const router = useRouter();
 
   // ==========================================
   // API & Data Fetching
@@ -101,7 +103,11 @@ export default function PokepediaScreen() {
   // Rendering Individual Pokémon Card Component
   // ==========================================
   const renderPokemonCard = ({ item }: { item: PokemonData }) => (
-    <View style={styles.card}>
+    <TouchableOpacity
+      style={styles.card}
+      activeOpacity={0.7}
+      onPress={() => router.push(`/${item.id}` as Href)}
+    >
       <Text style={styles.cardId}>#{item.id.toString().padStart(3, "0")}</Text>
 
       <Image source={{ uri: item.imageUrl }} style={styles.cardImage} />
@@ -118,7 +124,7 @@ export default function PokepediaScreen() {
           </View>
         ))}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   // ==========================================
