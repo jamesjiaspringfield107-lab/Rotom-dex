@@ -1,12 +1,20 @@
 import { useLocalSearchParams } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 
 export default function PokemonDetailWIPScreen() {
-  const { id } = useLocalSearchParams();
+  const { id, name, imageUrl } = useLocalSearchParams<{
+    id: string;
+    name: string;
+    imageUrl?: string;
+  }>();
 
   return (
     <View style={styles.container}>
       <View style={styles.content}>
+        {imageUrl ? (
+          <Image style={styles.PokemonImg} source={{ uri: imageUrl }} />
+        ) : null}
+        {name ? <Text style={styles.PokemonName}>{name}</Text> : null}
         <Text style={styles.icon}>🛠️</Text>
         <Text style={styles.title}>Work In Progress</Text>
         <Text style={styles.subtitle}>
@@ -14,7 +22,7 @@ export default function PokemonDetailWIPScreen() {
         </Text>
         <Text style={styles.subtitle_1}>
           {
-            "This is also a test for screen lifecycle,\n when how data would fetch and put inside this template screen (eg. the id)"
+            "This is also a test for screen lifecycle,\n when how data would fetch and put inside this template screen (eg. the id, imageUrl, and the names)"
           }
         </Text>
       </View>
@@ -56,5 +64,17 @@ const styles = StyleSheet.create({
     color: "#8e8e93",
     textAlign: "center",
     lineHeight: 22,
+  },
+  PokemonImg: {
+    height: 140,
+    width: 140,
+    alignSelf: "center",
+  },
+  PokemonName: {
+    fontSize: 22,
+    fontWeight: "bold",
+    textTransform: "capitalize",
+    marginBottom: 8,
+    alignSelf: "center",
   },
 });
