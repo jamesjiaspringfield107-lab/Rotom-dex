@@ -11,13 +11,19 @@ export default function PokemonDetailWIPScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        {imageUrl ? (
-          <Image style={styles.PokemonImg} source={{ uri: imageUrl }} />
-        ) : null}
+        <Image
+          style={styles.PokemonImg}
+          source={
+            imageUrl
+              ? { uri: imageUrl }
+              : require("../assets/images/Rotom_Error_WIP.jpg")
+          }
+        />
         {name ? <Text style={styles.PokemonName}>{name}</Text> : null}
         <Text style={styles.icon}>🛠️</Text>
         <Text style={styles.title}>Work In Progress</Text>
         <Text style={styles.subtitle}>
+          S
           {`Details for this Pokémon\n No.#${id?.toString().padStart(3, "0")}\n are still in WIP.`}
         </Text>
         <Text style={styles.subtitle_1}>
