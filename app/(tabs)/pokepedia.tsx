@@ -106,7 +106,12 @@ export default function PokepediaScreen() {
     <TouchableOpacity
       style={styles.card}
       activeOpacity={0.7}
-      onPress={() => router.push(`/${item.id}` as Href)}
+      onPress={() =>
+        router.push({
+          pathname: `/${item.id}`,
+          params: { name: item.name, imageUrl: item.imageUrl },
+        } as Href)
+      }
     >
       <Text style={styles.cardId}>#{item.id.toString().padStart(3, "0")}</Text>
 
