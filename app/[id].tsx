@@ -25,7 +25,7 @@ export default function PokemonDetailWIPScreen() {
           <Text style={styles.PokemonName}>Unknown Pokemon</Text>
         )}
         <Text style={styles.subtitle}>
-          {`No.#${id?.toString().padStart(3, "0")}`}
+          {`Details for this Pokémon\n No.#${id ? id.toString().padStart(3, "0") : "???"}`}
         </Text>
         <Text style={styles.icon}>🛠️</Text>
         <Text style={styles.title}>Work In Progress</Text>
