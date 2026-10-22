@@ -19,13 +19,16 @@ export default function PokemonDetailWIPScreen() {
               : require("../assets/images/Rotom_Error_WIP.jpg")
           }
         />
-        {name ? <Text style={styles.PokemonName}>{name}</Text> : null}
+        {name ? (
+          <Text style={styles.PokemonName}>{name}</Text>
+        ) : (
+          <Text style={styles.PokemonName}>Unknown Pokemon</Text>
+        )}
+        <Text style={styles.subtitle}>
+          {`No.#${id?.toString().padStart(3, "0")}`}
+        </Text>
         <Text style={styles.icon}>🛠️</Text>
         <Text style={styles.title}>Work In Progress</Text>
-        <Text style={styles.subtitle}>
-          S
-          {`Details for this Pokémon\n No.#${id?.toString().padStart(3, "0")}\n are still in WIP.`}
-        </Text>
         <Text style={styles.subtitle_1}>
           {
             "This is also a test for screen lifecycle,\n when how data would fetch and put inside this template screen (eg. the id, imageUrl, and the names)"
@@ -63,6 +66,8 @@ const styles = StyleSheet.create({
     color: "#111112",
     textAlign: "center",
     lineHeight: 22,
+    fontWeight: "bold",
+    alignSelf: "center",
   },
   subtitle_1: {
     paddingTop: 15,
