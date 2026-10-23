@@ -3,8 +3,10 @@ import { Href, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   FlatList,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -92,6 +94,10 @@ export default function PokepediaScreen() {
     }
   };
 
+  const wipAlert = (category: string) => {
+    Alert.alert("WIP", `The ${category} is still in WIP`);
+  };
+
   // ==========================================
   // Search Filtering Logic
   // ==========================================
@@ -159,7 +165,35 @@ export default function PokepediaScreen() {
           </TouchableOpacity>
         )}
       </View>
+      {/* Pokemon Gen Categories */}
+      <View style={styles.filterWrapper}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.filterContainer}
+        >
+          <TouchableOpacity
+            style={styles.filterBtn}
+            onPress={() => wipAlert("Global")}
+          >
+            <Text style={styles.filterText}>Global</Text>
+          </TouchableOpacity>
 
+          <TouchableOpacity
+            style={styles.filterBtn}
+            onPress={() => wipAlert("Gen 1")}
+          >
+            <Text style={styles.filterText}>Gen 1</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.filterBtn}
+            onPress={() => wipAlert("Gen 2")}
+          >
+            <Text style={styles.filterText}>Gen 2</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
       {/* Main FlatList Lazy-Loaded Content */}
       {loading ? (
         <ActivityIndicator
@@ -341,5 +375,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
+  },
+  filterWrapper: {
+    marginBottom: 12,
+  },
+  filterContainer: {
+    paddingHorizontal: 16,
+    gap: 8,
+  },
+  filterBtn: {
+    backgroundColor: "#f2f2f7",
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: "#e5e5ea",
+  },
+  filterText: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#333333",
   },
 });
