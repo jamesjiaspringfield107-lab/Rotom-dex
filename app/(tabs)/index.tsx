@@ -1,13 +1,23 @@
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Href, useRouter } from "expo-router";
+import {
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function PokedexHomeScreen() {
+  const router = useRouter();
+
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{ padding: 16, paddingBottom: 32 }}
+      contentContainerStyle={styles.content}
       showsVerticalScrollIndicator={false}
     >
-      {/* Rotom Greeting Banner */}
+      {/* 1. Rotom Greeting Banner */}
       <View style={styles.rotomBanner}>
         <View style={styles.rotomTextContainer}>
           <Text style={styles.greetingTitle}>Bzz-td!</Text>
@@ -24,6 +34,34 @@ export default function PokedexHomeScreen() {
           resizeMode="contain"
         />
       </View>
+
+      {/* 2. Pokémon of the Day Card (Baseline Feature) */}
+      <TouchableOpacity
+        style={styles.potdCard}
+        activeOpacity={0.8}
+        onPress={() =>
+          router.push({
+            pathname: "/1",
+            params: {
+              name: "Bulbasaur",
+              imageUrl:
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+            },
+          } as Href)
+        }
+      >
+        <View style={styles.potdInfo}>
+          <Text style={styles.potdTag}>Pokémon of the Day</Text>
+          <Text style={styles.potdName}>Bulbasaur #001</Text>
+          <Text style={styles.potdTypeText}>Grass / Poison</Text>
+        </View>
+        <Image
+          source={{
+            uri: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+          }}
+          style={styles.potdImage}
+        />
+      </TouchableOpacity>
     </ScrollView>
   );
 }
@@ -33,22 +71,24 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#ffffff",
   },
+  content: {
+    padding: 16,
+    paddingBottom: 30,
+  },
   rotomBanner: {
     flexDirection: "row",
-    backgroundColor: "#ff5252",
-    padding: 20,
+    backgroundColor: "#ff3b30",
     borderRadius: 22,
+    padding: 20,
+    alignItems: "center",
     justifyContent: "space-between",
     borderWidth: 1,
-    borderColor: "#ff5252",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    borderColor: "#ff6b6b",
+    shadowColor: "#ff3b30",
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 6,
   },
   rotomTextContainer: {
     flex: 1,
@@ -61,21 +101,49 @@ const styles = StyleSheet.create({
   greetingSubtitle: {
     fontSize: 14,
     color: "#ffebee",
+    marginTop: 2,
+    fontWeight: "500",
   },
   rotomBadge: {
-    fontSize: 10,
+    fontSize: 11,
     color: "#ffffff",
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-    marginTop: 8,
+    backgroundColor: "rgba(255, 255, 255, 0.25)",
     alignSelf: "flex-start",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 10,
+    marginTop: 10,
+    fontWeight: "700",
     overflow: "hidden",
-    fontWeight: "bold",
   },
   rotomImage: {
     width: 75,
     height: 75,
+  },
+
+  potdCard: {
+    flexDirection: "row",
+    backgroundColor: "#f2f2f7",
+    padding: 16,
+    marginTop: 20,
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  potdInfo: {
+    flex: 1,
+  },
+  potdTag: {
+    fontSize: 12,
+  },
+  potdName: {
+    fontSize: 18,
+    fontWeight: "bold",
+  },
+  potdTypeText: {
+    fontSize: 12,
+  },
+  potdImage: {
+    width: 70,
+    height: 70,
   },
 });
