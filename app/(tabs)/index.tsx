@@ -1,12 +1,5 @@
 import { Href, useRouter } from "expo-router";
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 export default function PokedexHomeScreen() {
   const router = useRouter();
@@ -21,9 +14,7 @@ export default function PokedexHomeScreen() {
       <View style={styles.rotomBanner}>
         <View style={styles.rotomTextContainer}>
           <Text style={styles.greetingTitle}>Bzz-td!</Text>
-          <Text style={styles.greetingSubtitle}>
-            Ready to explore, Trainer!
-          </Text>
+          <Text style={styles.greetingSubtitle}>Ready to explore, Trainer!</Text>
           <Text style={styles.rotomBadge}>Rotom Dex Active</Text>
         </View>
         <Image
@@ -40,15 +31,17 @@ export default function PokedexHomeScreen() {
         style={styles.potdCard}
         activeOpacity={0.8}
         onPress={() =>
-          router.push({
-            pathname: "/1",
-            params: {
+          onPress={() =>
+              router.push({
+              pathname: "/[id]",
+              params: {
+              id: "1",
               name: "Bulbasaur",
-              imageUrl:
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-            },
-          } as Href)
-        }
+      imageUrl:
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+    },
+  })
+}
       >
         <View style={styles.potdInfo}>
           <Text style={styles.potdTag}>Pokémon of the Day</Text>
