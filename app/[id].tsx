@@ -56,15 +56,13 @@ export default function PokemonDetailWIPScreen() {
           >
             <Ionicons name="albums-outline" size={18} color="#e88903" />
           </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.Icon}
+            onPress={() => wipAlrt("Pokemon Cry")}
+          >
+            <Ionicons name="volume-high-outline" size={18} color="#8d8d8c" />
+          </TouchableOpacity>
         </View>
-
-        <Text style={styles.icon}>🛠️</Text>
-        <Text style={styles.title}>Work In Progress</Text>
-        <Text style={styles.subtitle_1}>
-          {
-            "This is also a test for screen lifecycle,\n when how data would fetch and put inside this template screen (eg. the id, imageUrl, and the names)"
-          }
-        </Text>
       </View>
     </View>
   );
