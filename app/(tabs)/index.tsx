@@ -1,8 +1,27 @@
-import { Href, useRouter } from "expo-router";
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useRouter } from "expo-router";
+import {
+  Alert,
+  Image,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function PokedexHomeScreen() {
   const router = useRouter();
+
+  const POKEMON_TYPES = [
+    { name: "Fire", color: "#ff9c54" },
+    { name: "Water", color: "#4d90d5" },
+    { name: "Grass", color: "#63bc5d" },
+    { name: "Electric", color: "#f3d23b" },
+    { name: "Psychic", color: "#f97176" },
+    { name: "Ghost", color: "#5269ac" },
+    { name: "Dragon", color: "#0a6dc4" },
+    { name: "Fairy", color: "#ec8fe6" },
+  ];
 
   return (
     <ScrollView
@@ -14,7 +33,9 @@ export default function PokedexHomeScreen() {
       <View style={styles.rotomBanner}>
         <View style={styles.rotomTextContainer}>
           <Text style={styles.greetingTitle}>Bzz-td!</Text>
-          <Text style={styles.greetingSubtitle}>Ready to explore, Trainer!</Text>
+          <Text style={styles.greetingSubtitle}>
+            Ready to explore, Trainer!
+          </Text>
           <Text style={styles.rotomBadge}>Rotom Dex Active</Text>
         </View>
         <Image
@@ -31,18 +52,36 @@ export default function PokedexHomeScreen() {
         style={styles.potdCard}
         activeOpacity={0.8}
         onPress={() =>
-          onPress={() =>
-              router.push({
-              pathname: "/[id]",
-              params: {
+          router.push({
+            pathname: "/[id]",
+            params: {
               id: "1",
               name: "Bulbasaur",
-      imageUrl:
-        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
-    },
-  })
-}
+              imageUrl:
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+            },
+          })
+        }
       >
+        {/* 3. Explore by Type (Baseline Feature) */}
+        <Text style={styles.sectionTitle}>Explore by Type</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {POKEMON_TYPES.map((type) => (
+            <TouchableOpacity
+              key={type.name}
+              style={[styles.typePill, { backgroundColor: type.color }]}
+              onPress={() =>
+                Alert.alert(
+                  `${type.name} Type`,
+                  `Filtering Poképedia by ${type.name} type is coming soon!`,
+                )
+              }
+            >
+              <Text style={styles.typePillText}>{type.name}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
         <View style={styles.potdInfo}>
           <Text style={styles.potdTag}>Pokémon of the Day</Text>
           <Text style={styles.potdName}>Bulbasaur #001</Text>
@@ -113,7 +152,6 @@ const styles = StyleSheet.create({
     width: 75,
     height: 75,
   },
-
   potdCard: {
     flexDirection: "row",
     backgroundColor: "#f2f2f7",
@@ -138,5 +176,20 @@ const styles = StyleSheet.create({
   potdImage: {
     width: 70,
     height: 70,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: "bold",
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  typePill: {
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    marginRight: 8,
+  },
+  typePillText: {
+    color: "#ffffff",
+    fontWeight: "bold",
   },
 });
