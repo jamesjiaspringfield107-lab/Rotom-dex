@@ -9,19 +9,19 @@ import {
   View,
 } from "react-native";
 
+const POKEMON_TYPES = [
+  { name: "Fire", color: "#ff9c54" },
+  { name: "Water", color: "#4d90d5" },
+  { name: "Grass", color: "#63bc5d" },
+  { name: "Electric", color: "#f3d23b" },
+  { name: "Psychic", color: "#f97176" },
+  { name: "Ghost", color: "#5269ac" },
+  { name: "Dragon", color: "#0a6dc4" },
+  { name: "Fairy", color: "#ec8fe6" },
+];
+
 export default function PokedexHomeScreen() {
   const router = useRouter();
-
-  const POKEMON_TYPES = [
-    { name: "Fire", color: "#ff9c54" },
-    { name: "Water", color: "#4d90d5" },
-    { name: "Grass", color: "#63bc5d" },
-    { name: "Electric", color: "#f3d23b" },
-    { name: "Psychic", color: "#f97176" },
-    { name: "Ghost", color: "#5269ac" },
-    { name: "Dragon", color: "#0a6dc4" },
-    { name: "Fairy", color: "#ec8fe6" },
-  ];
 
   return (
     <ScrollView
@@ -33,9 +33,7 @@ export default function PokedexHomeScreen() {
       <View style={styles.rotomBanner}>
         <View style={styles.rotomTextContainer}>
           <Text style={styles.greetingTitle}>Bzz-td!</Text>
-          <Text style={styles.greetingSubtitle}>
-            Ready to explore, Trainer!
-          </Text>
+          <Text style={styles.greetingSubtitle}>Ready to explore, Trainer!</Text>
           <Text style={styles.rotomBadge}>Rotom Dex Active</Text>
         </View>
         <Image
@@ -47,7 +45,7 @@ export default function PokedexHomeScreen() {
         />
       </View>
 
-      {/* 2. Pokémon of the Day Card (Baseline Feature) */}
+      {/* 2. Pokémon of the Day Card */}
       <TouchableOpacity
         style={styles.potdCard}
         activeOpacity={0.8}
@@ -63,29 +61,12 @@ export default function PokedexHomeScreen() {
           })
         }
       >
-        {/* 3. Explore by Type (Baseline Feature) */}
-        <Text style={styles.sectionTitle}>Explore by Type</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {POKEMON_TYPES.map((type) => (
-            <TouchableOpacity
-              key={type.name}
-              style={[styles.typePill, { backgroundColor: type.color }]}
-              onPress={() =>
-                Alert.alert(
-                  `${type.name} Type`,
-                  `Filtering Poképedia by ${type.name} type is coming soon!`,
-                )
-              }
-            >
-              <Text style={styles.typePillText}>{type.name}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-
         <View style={styles.potdInfo}>
           <Text style={styles.potdTag}>Pokémon of the Day</Text>
           <Text style={styles.potdName}>Bulbasaur #001</Text>
-          <Text style={styles.potdTypeText}>Grass / Poison</Text>
+          <View style={styles.potdTypeBadge}>
+            <Text style={styles.potdTypeText}>Grass / Poison</Text>
+          </View>
         </View>
         <Image
           source={{
@@ -94,6 +75,25 @@ export default function PokedexHomeScreen() {
           style={styles.potdImage}
         />
       </TouchableOpacity>
+
+      {/* 3. Explore by Type */}
+      <Text style={styles.sectionTitle}>Explore by Type</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {POKEMON_TYPES.map((type) => (
+          <TouchableOpacity
+            key={type.name}
+            style={[styles.typePill, { backgroundColor: type.color }]}
+            onPress={() =>
+              Alert.alert(
+                `${type.name} Type`,
+                `Filtering Poképedia by ${type.name} type is coming soon!`,
+              )
+            }
+          >
+            <Text style={styles.typePillText}>{type.name}</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
     </ScrollView>
   );
 }
@@ -154,42 +154,75 @@ const styles = StyleSheet.create({
   },
   potdCard: {
     flexDirection: "row",
-    backgroundColor: "#f2f2f7",
+    backgroundColor: "#e8f5e9",
+    borderRadius: 18,
     padding: 16,
-    marginTop: 20,
     alignItems: "center",
     justifyContent: "space-between",
+    marginTop: 20,
+    borderWidth: 1,
+    borderColor: "#c8e6c9",
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
   },
   potdInfo: {
     flex: 1,
   },
   potdTag: {
-    fontSize: 12,
+    fontSize: 11,
+    color: "#2e7d32",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
   },
   potdName: {
     fontSize: 18,
     fontWeight: "bold",
+    color: "#1b5e20",
+    marginTop: 4,
+  },
+  potdTypeBadge: {
+    backgroundColor: "#63bc5d",
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 10,
+    alignSelf: "flex-start",
+    marginTop: 8,
   },
   potdTypeText: {
-    fontSize: 12,
+    color: "#ffffff",
+    fontSize: 11,
+    fontWeight: "bold",
   },
   potdImage: {
-    width: 70,
-    height: 70,
+    width: 80,
+    height: 80,
   },
   sectionTitle: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: "bold",
-    marginTop: 20,
-    marginBottom: 10,
+    color: "#1c1c1e",
+    marginTop: 24,
+    marginBottom: 12,
   },
   typePill: {
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    marginRight: 8,
+    paddingHorizontal: 18,
+    paddingVertical: 10,
+    borderRadius: 20,
+    marginRight: 10,
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.12,
+    shadowRadius: 3,
+    elevation: 2,
   },
   typePillText: {
     color: "#ffffff",
+    fontSize: 13,
     fontWeight: "bold",
+    letterSpacing: 0.3,
   },
 });
