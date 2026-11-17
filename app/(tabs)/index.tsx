@@ -33,7 +33,9 @@ export default function PokedexHomeScreen() {
       <View style={styles.rotomBanner}>
         <View style={styles.rotomTextContainer}>
           <Text style={styles.greetingTitle}>Bzz-td!</Text>
-          <Text style={styles.greetingSubtitle}>Ready to explore, Trainer!</Text>
+          <Text style={styles.greetingSubtitle}>
+            Ready to explore, Trainer!
+          </Text>
           <Text style={styles.rotomBadge}>Rotom Dex Active</Text>
         </View>
         <Image
@@ -94,6 +96,24 @@ export default function PokedexHomeScreen() {
           </TouchableOpacity>
         ))}
       </ScrollView>
+
+      {/* 4. Pokédex Quick Stats Bar */}
+      <View style={styles.statsCard}>
+        <View style={styles.statItem}>
+          <Text style={styles.statNumber}>151</Text>
+          <Text style={styles.statLabel}>Kanto Dex</Text>
+        </View>
+        <View style={styles.statDivider} />
+        <View style={styles.statItem}>
+          <Text style={styles.statNumber}>Online</Text>
+          <Text style={styles.statLabel}>PokéAPI Sync</Text>
+        </View>
+        <View style={styles.statDivider} />
+        <View style={styles.statItem}>
+          <Text style={styles.statNumber}>v3.1</Text>
+          <Text style={styles.statLabel}>Rotom OS</Text>
+        </View>
+      </View>
     </ScrollView>
   );
 }
@@ -224,5 +244,36 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "bold",
     letterSpacing: 0.3,
+  },
+
+  statsCard: {
+    flexDirection: "row",
+    backgroundColor: "#f2f2f7",
+    borderRadius: 16,
+    padding: 16,
+    marginTop: 24,
+    alignItems: "center",
+    justifyContent: "space-around",
+    borderWidth: 1,
+    borderColor: "#e5e5ea",
+  },
+  statItem: {
+    alignItems: "center",
+  },
+  statNumber: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#1c1c1e",
+  },
+  statLabel: {
+    fontSize: 11,
+    color: "#8e8e93",
+    marginTop: 2,
+    fontWeight: "600",
+  },
+  statDivider: {
+    width: 1,
+    height: 24,
+    backgroundColor: "#d1d1d6",
   },
 });
