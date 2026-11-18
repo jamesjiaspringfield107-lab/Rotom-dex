@@ -6,55 +6,10 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 export default function Layout() {
   const insets = useSafeAreaInsets();
 
-  // ==========================================
-  // HANDLERS
-  // ==========================================
   const handleWipAlert = (featureName: string) => {
     Alert.alert("Work in Progress", `${featureName} button is still in WIP!`);
   };
 
-  // ==========================================
-  // HEADER COMPONENTS
-  // ==========================================
-  // Default header right icon for Home, Team, and More
-  const renderDefaultHeaderRight = () => (
-    <TouchableOpacity
-      style={styles.headerButton_default}
-      onPress={() => handleWipAlert("Menu Options")}
-    >
-      <Entypo name="dots-three-vertical" size={22} color="#000000" />
-    </TouchableOpacity>
-  );
-
-  // Exclusive header right icons for Pokedex tab
-  const renderPokedexHeaderRight = () => (
-    <View style={styles.pokedexHeaderRight}>
-      <TouchableOpacity
-        style={styles.headerButton}
-        onPress={() => handleWipAlert("Grid View - List View Toggle")}
-      >
-        <Ionicons name="grid-outline" size={20} color="#000000" />
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.headerButton}
-        onPress={() => handleWipAlert("Filter Options")}
-      >
-        <Ionicons name="filter-outline" size={20} color="#000000" />
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.headerButton}
-        onPress={() => handleWipAlert("Menu Options")}
-      >
-        <Entypo name="dots-three-vertical" size={22} color="#000000" />
-      </TouchableOpacity>
-    </View>
-  );
-
-  // ==========================================
-  // NAVIGATION CONFIGURATION
-  // ==========================================
   return (
     <Tabs
       screenOptions={{
@@ -66,7 +21,14 @@ export default function Layout() {
         headerTitleStyle: {
           fontWeight: "bold",
         },
-        headerRight: renderDefaultHeaderRight,
+        headerRight: () => (
+          <TouchableOpacity
+            style={styles.headerButton_default}
+            onPress={() => handleWipAlert("Menu Options")}
+          >
+            <Entypo name="dots-three-vertical" size={22} color="#000000" />
+          </TouchableOpacity>
+        ),
 
         tabBarInactiveTintColor: "#000000",
         tabBarActiveBackgroundColor: "#dcd5d5",
@@ -91,7 +53,7 @@ export default function Layout() {
           title: "Home",
           tabBarActiveTintColor: "#f87109",
           tabBarIcon: ({ color }) => (
-            <Ionicons name="home" size={26} color={color} />
+            <Ionicons name="home" size={26} color={color as string} />
           ),
         }}
       />
@@ -103,9 +65,36 @@ export default function Layout() {
           title: "Pokedex",
           tabBarActiveTintColor: "#f80909",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="pokeball" size={26} color={color} />
+            <MaterialCommunityIcons
+              name="pokeball"
+              size={26}
+              color={color as string}
+            />
           ),
-          headerRight: renderPokedexHeaderRight,
+          headerRight: () => (
+            <View style={styles.pokedexHeaderRight}>
+              <TouchableOpacity
+                style={styles.headerButton}
+                onPress={() => handleWipAlert("Grid View - List View Toggle")}
+              >
+                <Ionicons name="grid-outline" size={20} color="#000000" />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.headerButton}
+                onPress={() => handleWipAlert("Filter Options")}
+              >
+                <Ionicons name="filter-outline" size={20} color="#000000" />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.headerButton}
+                onPress={() => handleWipAlert("Menu Options")}
+              >
+                <Entypo name="dots-three-vertical" size={22} color="#000000" />
+              </TouchableOpacity>
+            </View>
+          ),
         }}
       />
 
@@ -116,7 +105,7 @@ export default function Layout() {
           title: "Team",
           tabBarActiveTintColor: "#079e1b",
           tabBarIcon: ({ color }) => (
-            <Ionicons name="people" size={26} color={color} />
+            <Ionicons name="people" size={26} color={color as string} />
           ),
         }}
       />
@@ -128,7 +117,11 @@ export default function Layout() {
           title: "More",
           tabBarActiveTintColor: "#1909f8",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="menu" size={26} color={color} />
+            <MaterialCommunityIcons
+              name="menu"
+              size={26}
+              color={color as string}
+            />
           ),
         }}
       />
@@ -136,9 +129,6 @@ export default function Layout() {
   );
 }
 
-// ==========================================
-// STYLESHEET
-// ==========================================
 const styles = StyleSheet.create({
   headerButton_default: {
     paddingHorizontal: 10,
