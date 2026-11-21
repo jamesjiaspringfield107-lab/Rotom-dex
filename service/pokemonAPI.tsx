@@ -1,4 +1,4 @@
-import { PokemonData } from "../types/pokemon";
+import { AbilityItem, PokemonData } from "../types/pokemon";
 
 export const getPokepediaData = async (): Promise<PokemonData[]> => {
   try {
@@ -22,6 +22,28 @@ export const getPokepediaData = async (): Promise<PokemonData[]> => {
     return pokemonList;
   } catch (error) {
     console.error("Error fetching Pokémon data:", error);
+    return [];
+  }
+};
+
+export const getPokemonAbilities = async (
+  id: string,
+): Promise<AbilityItem[]> => {
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    if (!response.ok) {
+      return [];
+    }
+
+    const details = await response.json();
+    return (
+      details.abilities?.map((entry: any) => ({
+        name: entry.ability.name.replace(/-/g, " "),
+        isHidden: Boolean(entry.is_hidden),
+      })) ?? []
+    );
+  } catch (error) {
+    console.error("Error fetching Pokémon abilities:", error);
     return [];
   }
 };

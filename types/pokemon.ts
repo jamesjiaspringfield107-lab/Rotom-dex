@@ -6,3 +6,8 @@ export interface PokemonData {
   imageUrl: string;
   types: string[];
 }
+
+export interface AbilityItem {
+  name: string;
+  isHidden: boolean;
+}
